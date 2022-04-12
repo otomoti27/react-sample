@@ -1,14 +1,28 @@
-import { ColoredMessage } from "./components/ColoredMessage"
-import { CountUpButton } from "./components/CountUpButton"
+// import { ColoredMessage } from "./components/ColoredMessage"
+// import { CountUpButton } from "./components/CountUpButton"
+import { memo, useCallback, useState } from 'react'
+import { Child1 } from './components/Child1'
+import { Child4 } from './components/Child4'
 
-export const App = () => {
+export const App = memo(() => {
+  console.log('Appレンダリング')
+
+  const [num, setNum] = useState(0)
+
+  const onClickButton = () => {
+    setNum((prev) => prev + 1)
+  }
+
+  const onClickReset = useCallback(() => {
+    setNum(0)
+  }, [])
 
   return (
     <>
-      <h1>こんにちは！</h1>
-      <ColoredMessage color='blue'>お元気ですか？</ColoredMessage> 
-      <ColoredMessage color='pink'>元気です！</ColoredMessage>
-      <CountUpButton />
+      <button onClick={onClickButton}>ボタン</button>
+      <p>{num}</p>
+      <Child1 onClickReset={onClickReset} />
+      <Child4 />
     </>
   )
-}
+})
