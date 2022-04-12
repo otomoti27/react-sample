@@ -5,6 +5,7 @@ services:
     build: ./docker/node
     volumes:
       - ./node:/usr/src/app:cached
-    command: sh -c "cd react-sample && yarn start"
+    working_dir: /usr/src/app/react-sample
+    command: sh -c "npm start"
     ports:
       - "3000:3000"
